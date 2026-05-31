@@ -1,0 +1,6 @@
+from flask import Blueprint
+from app.controllers.student_controller import *
+
+student_bp = Blueprint("students", __name__, url_prefix="/api/students")
+
+student_bp.route("", methods=["POST"])(create_student)

@@ -5,6 +5,14 @@ from app import db
 
 def create_student():
     data = request.get_json()
+    # vaildation
+    if not data:
+        return jsonify({"error": "you must put the value"}), 400
+    elif not data.get("name"):
+        return jsonify({"error": "Name is required"}), 400
+    elif not data.get("age"):
+        return jsonify({"error": "Age is required"}), 400
+
     student = Student(name=data["name"], age=data["age"])
     db.session.add(student)
     db.session.commit()

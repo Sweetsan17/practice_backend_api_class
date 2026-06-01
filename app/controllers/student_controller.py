@@ -50,3 +50,13 @@ def update_student(id):
     student.age = data.get("age", student.age)
     db.session.commit()
     return jsonify({"message": f"Student Id={id} Is Updated"}), 201
+
+
+def delete_student(id):
+    student = Student.query.get_or_404(id)
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Student Data Not Found"}), 400
+    db.session.delete(student)
+    db.session.commit()
+    return jsonify({"message": f"Student Id={id} is Deleted"}), 201

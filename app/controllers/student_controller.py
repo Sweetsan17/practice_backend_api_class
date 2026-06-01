@@ -42,10 +42,10 @@ def get_student(id):
 
 
 def update_student(id):
-    student = Student.query.get(id)
+    student = Student.query.get_or_404(id)
     data = request.get_json()
     if not data:
-        return jsonify({"error": "Student Not Found"}), 404
+        return jsonify({"error": "Student Data Not Found"}), 404
     student.name = data.get("name", student.name)
     student.age = data.get("age", student.age)
     db.session.commit()

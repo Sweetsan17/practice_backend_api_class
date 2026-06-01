@@ -26,3 +26,16 @@ def get_students():
         for s in students
     ]
     return jsonify(results)
+
+
+def get_student(id):
+    student = Student.query.get_or_404(id)
+
+    return jsonify(
+        {
+            "id": student.id,
+            "name": student.name,
+            "age": student.age,
+            "is_active": student.is_active,
+        }
+    )

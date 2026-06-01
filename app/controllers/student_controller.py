@@ -17,3 +17,12 @@ def create_student():
     db.session.add(student)
     db.session.commit()
     return jsonify({"message": " Student is Created"}), 201
+
+
+def get_students():
+    students = Student.query.all()
+    results = [
+        {"id": s.id, "name": s.name, "age": s.age, "is_active": s.is_active}
+        for s in students
+    ]
+    return jsonify(results)

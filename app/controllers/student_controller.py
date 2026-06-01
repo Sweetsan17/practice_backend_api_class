@@ -39,3 +39,14 @@ def get_student(id):
             "is_active": student.is_active,
         }
     )
+
+
+def update_student(id):
+    student = Student.query.get(id)
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Student Not Found"}), 404
+    student.name = data.get("name", student.name)
+    student.age = data.get("age", student.age)
+    db.session.commit()
+    return jsonify({"message": f"Student Id={id} Is Updated"}), 201
